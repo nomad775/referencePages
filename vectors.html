@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    </head>
+    <body>
+        <div>
+            <h1>Vectors, Etc</h1>
+            <h2>Dot Product</h2>
+            $$\textbf{A} \cdot \textbf{B} = \vert{\textbf{A}}\vert{\textbf{B}}\vert\cos{\theta}$$
+            $$\textbf{A} \cdot \textbf{B} = a_x \cdot b_x \cdot c_x + a_y \cdot b_y \cdot c_y + a_z \cdot b_z \cdot c_z$$
+            <h2>Cross Product</h2>
+            $$A\times B=\vert{A}\vert\vert{B}\vert \sin{\theta} \hat{\textbf{n}}
+            \quad\text{ or as a determinate}\quad \textbf{A} \times \textbf{B} = \det\begin{bmatrix}i & j & k\\ax & ay & az\\bx&by&bz\end{bmatrix}$$
+            or by components
+            $$\begin{align*}c_x = a_y b_z - a_zb_y \\ c_y=a_zb_x-a_xb_z \\ c_z=a_xb_y-a_yb_x\end{align*}$$
+           
+
+            <h2>Coordinate system rotations</h2>
+            $$x'= x\cos{\theta} + y\sin{\theta}$$
+            $$y' = y\cos{\theta} - x\sin{\theta}$$
+            <p>In matrix form</p>
+            $$\begin{bmatrix} x' \\ y'\end{bmatrix} = \begin{bmatrix} \cos{\theta} & \sin{\theta} \\ -\sin{\theta} & \cos{\theta} \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix}$$
+
+            <p>Expanded to 3D</p>
+            $$R_z(\theta)=\begin{bmatrix} x' \\ y' \\z' \end{bmatrix} = \begin{bmatrix} \cos{\theta} & \sin{\theta} & 0\\ -\sin{\theta} & \cos{\theta} & 0 \\ 0 & 0 & 1 \end{bmatrix} \begin{bmatrix} x \\ y \\z\end{bmatrix}$$
+            
+
+            <p>About the X axis</p>
+            $$R_x(\theta)=\begin{bmatrix} x' \\ y' \\z' \end{bmatrix} = 
+            \begin{bmatrix}
+                         1            & 0            & 0 \\
+                         0 & \cos{\theta}  & \sin{\theta} \\
+                         0 &-\sin{\theta}  & \cos{\theta} \\
+                         
+                    \end{bmatrix}
+                        
+                        \begin{bmatrix} x \\ y \\z\end{bmatrix}$$
+
+            <p>About the Y axis</p>
+            $$R_y(\theta)=\begin{bmatrix} x' \\ y' \\z' \end{bmatrix} = 
+            \begin{bmatrix}
+                \cos{\theta}  & 0 & -\sin{\theta} \\
+                0             & 1 & 0             \\
+                \sin{\theta}  & 0 &  \cos{\theta} \\
+            \end{bmatrix}
+                        
+            \begin{bmatrix} x \\ y \\z\end{bmatrix}$$
+
+            <p>Rotating a vector is equivalent to rotating the coordinate system in the opposite direction.  Since cos -x = cos x but sin -x = -sin x then the result is chnaging the signs of the sin terms.</p>
+            
+            <p>Mirror a vector</p>
+            $$ \vec r=\vec A-2(\vec A \bullet \hat n)\hat n$$
+            <h1>SVG User transform</h1>
+            <p>From the SVG spec the user transform, from viewbox to viewport, $U$ is made up of</p>
+            $$U = UP + US + UR$$
+            where
+            <ul>
+            <li>UP is pan by SVG.currentTranslate</li>
+            <li>US is scale by SVG.currentScale</li>
+            <li>UR is rotate by SVG.currentRotate</li>
+        </ul>
+        </div>
+
+    </body>
+</html>                                                

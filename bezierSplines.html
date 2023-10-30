@@ -1,0 +1,109 @@
+<html>
+    <head>
+        <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+    </head>
+    <body>
+        <div>
+            <h1>Spline Representations</h1>
+            <p>Splines can be represented in several forms (linear shown)</p>
+            <table>
+                <tr>
+                    <td>polynomial</td>
+                    <td>$$f(t)=at + b$$</td>
+                </tr>
+                <tr>
+                    <td>parametric</td>
+                    <td>$$ f(t)=(p_1-p_0)t + p_0t$$</td>
+                </tr>
+                <tr>
+                    <td>weighted sum</td>
+                    <td>$$f(t)= p_0(1-t) + p_0t $$</td>
+                </tr>
+                <tr>
+                    <td>basis function </td>
+                    <td>$$f(t) = B_0(t)p_0 + B_1(t)p_1 $$</td>
+                </tr>
+                <tr>
+                    <td>matrix form</td>
+                    <td>$$ f(t) = \begin{bmatrix}p_0 &  p_1\end{bmatrix}
+                        \begin{bmatrix}-1 & 1 \\ 1 & 0 \end{bmatrix}
+                        \begin{bmatrix} t \\ 1 \end{bmatrix}$$</td>
+                </tr>
+                <tr>
+                    <td>or</td>
+                    <td> $$ f(t) = \begin{bmatrix}t & 1\end{bmatrix}
+                        \begin{bmatrix}-1 & 1 \\ 1 & 0 \end{bmatrix}
+                        \begin{bmatrix} p_0 \\ p_1 \end{bmatrix}$$</td>
+                </tr>
+            </table>
+           
+
+            <h1>Bezier Curves</h1>
+            <p>Bezier curves are a series of recursive linear interpoloations.  See de Casteljau Algorithm</p>
+            $$f(t)=(1-t)[((t-1)(1-t)p_0 + tp_1) + t((1-t)p_1 + tp_2)] + t[(t-1)((1-t)p_1+ tp_2) + t((1-t)p_2 + tp_3)]$$
+
+            <p>Collecting t terms</p>
+            $$\begin{align} &\text{factored } f(t) = (1-t)^3P_0 + 3t(1-t)^2P_1 + 3t^2(1 - t) P_2 + t^3 P_3 \\
+            &\text{expanded } f(t) = (-t^3 + 3t^2 - 3t + 1)P_0 + (3t^3 - 6t^2 + 3t)P_1 + (-3t^3 + 3t^2)P_2 + t^3 P_3 \end{align}$$
+
+            $$f(t) = (-t^3 + 3t^2 -3t+ 1) p_0 + (3t^3 - 6t^2 + 3t)p_1 + (-3t^3 + 3t^2)p_3 + t^3p_3 $$
+           
+            <p>The polynomial coefficients are the Bernstein polynomials</p>
+            $$f(t) = B_0(t)p_0 + B_1(t)p_1 + B_2(t)p_2 + B_3 p_3$$
+           
+            <p>which can be expressed with a binomial term</p>
+            $$B_i^n (t) =\dbinom{n}{i} (1-t)^{n-1} \cdot t^i \quad \text{ where } \quad  \dbinom{n}{i} = \frac{n!}{i!(n-i)!}$$
+           
+            <p>so the Bezier curve can be expressed as</p>
+            $$f(t) = \sum_{i=0}^{n} B_i^n (t) \cdot p_i$$
+            
+            <h2>Matrix Forms</h2>
+            <p>From the Bernstein polynomicals as coefficients of the points the equation is</p>
+            $$f(t) = (-t^3 + 3t^2 -3t + 1) p_0 + (3t^3 - 6t^2 + 3t)p_1 + (-3t^3 + 3t^2)p_3 + t^3p_3  
+            \quad \Rightarrow \quad
+            \begin{bmatrix} p_0 & p_1 & p_2 & p_3 \end{bmatrix}
+            \begin{bmatrix}
+                -1 &  3 & -3 & 1 \\
+                 3 & -6 &  3 & 0 \\
+                -3 &  3 &  0 & 0 \\
+                 1 &  0 &  0 & 0 \\
+            \end{bmatrix}
+            \begin{bmatrix}t^3 \\ t^2 \\ t \\ 1 \end{bmatrix}$$
+
+            <p>Rearranged so the points are coeffiencts of \(t\), then substituting \(a\), \(b\), \(c\), and \(d \) for the coefficents</p>
+            $$f(t) = (-p_0 + 3p_1 - 3p_2 + p_3) t^3 + (3p_0 - 6p_1 + 3p_2)t^2 + (-3p_0 + 3p_1)t + p_0
+            \quad \Rightarrow \quad
+            at^3 + bt^2 + ct + d
+            \quad \Rightarrow \quad
+            \begin{bmatrix} a & b & c & d \end{bmatrix} \begin{bmatrix} t^3 \\ t^2 \\ t \\ 1 \end{bmatrix}$$
+            
+            $$
+            \text{Since} (AB)^T = B^T A^T \text{then}
+            f(t) = \begin{bmatrix} t^3 & t^2 & t & 1\end{bmatrix}
+            \begin{bmatrix} -1 &  3 & -3 & 1 \\
+                             3 & -6 &  3 & 0 \\
+                            -3 &  3 &  0 & 0 \\
+                             1 &  0 &  0 & 0 \\
+                             \end{bmatrix}
+            \begin{bmatrix} p_0 \\ p_1 \\ p_2 \\ p_3 \end{bmatrix}
+            \quad \text{or} \quad
+            \begin{bmatrix} t^3 & t^2 & t & 1\end{bmatrix}
+            \begin{bmatrix} a \\ b \\ c \\d \end{bmatrix}
+            
+            $$
+
+            <h2>Quadratic Bezier</h2>
+            $$f(t)=(1-t)^2p_0 + 2t(1-t)p_1 + t^2p_2$$
+            
+            <p>In matrix form</p>
+            $$f(t) = \begin{bmatrix} t^2 & t & 1\end{bmatrix}
+            \begin{bmatrix}
+            1 & -2 & 1 \\\
+            -2 & 2 & 0 \\
+            1 & 0 & 0 
+            \end{bmatrix}
+            \begin{bmatrix} p_1 \\ p_2 \\ p_3\end{bmatrix}$$
+        </div>
+    </body>
+</html>                                                

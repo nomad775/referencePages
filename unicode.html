@@ -1,0 +1,76 @@
+<html>
+    <head>
+
+        <meta charset="UTF-8">
+        <style>
+            body{
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <p>HTML uses 32bit encoding, escaped  with &# for decimal or &#x for hex</p>
+        <p>JavaScript has 3 escape options:</p>
+            <ul>
+                <li>\x00      for 8 bit,  must be 2 digits</li>
+                <li>\u0000    for 16 bit, must be 4 digits</li>
+                <li>\{000000} for 32 bit, may be 1 to 6 digits</li>
+            </ul>
+
+            <p>Some glyphs are made up of conugate pairs for encoding to a lower standard.  For example, the link character 🔗 (U+1F517) can be encoded with 128279 or 1F517 in 32 bit. 
+                 For 16 bit it is made up of a conugate pair D83D and DD17 in hex, but cannot be encoded with decimal since the pair would be 55357 and 56599, which is more than 4 digits</p>
+
+        <table style="width: 600px;">
+            <tbody>
+                <tr style="column-width: 20em;">
+                    <td>Bits</td>
+                    <td>Dec</td>
+                    <td>Hex</td>
+                </tr>
+                <tr>
+                    <td>32</td>
+                    <td>128279 &#128279;</td>
+                    <td>1F517 &#x1F517;</td>
+                </tr>
+
+                <tr>
+                    <td>16</td>
+                    <td id="dec16">\u55357\u56599</td>
+                    <td id="hex16">\uD83D\uDD17</td>
+                </tr>
+
+                <tr>
+                    <td>8</td>
+                    <td id="8dec"></td>
+                    <td id="8hex">\xF0\x9F\x94\x97</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Some symbols have standardized varition for alternative display.  For example the Miscellaneous block uses variation selectors VS15 for text display and VS16 for emoji display.  For example, the symbol for Aries uses base code U+2648 (dec 9800) and defaults display is an emoji - &#x2648; however selector VS15 (U+FE0E; 65038 dec) can be used for monochrome text styling &#x2648;&#65038;. Likewise the &#x262F;  symbol U+262F default presentation is text however selector VS16 (U+FE0F, 65039 dec) can be used for emoji style with color &#x262F;&#xFE0F;</p>
+        <p>Not all characters have variations and other blocks, such as </p>
+        
+    </body>
+    <script>
+        // let dec16 = "\u55357\u56599";
+        // let hex16 = "\uD83D\uDD17";
+        // document.getElementById("dec16").textContent = dec16;
+        // document.getElementById("hex16").textContent = hex16;
+
+        // let dec8 = ""
+        // let hex8 ="\xF0 \x9F \x94 \x97";
+        // document.getElementById("dec8").textContent = dec8;
+        // document.getElementById("hex8").textContent = hex8;
+    </script>
+</html>
+
+<!-- //🔗 (U+1F517)
+// 8    0xF0 0x9F 0x94 0x97
+//16    0xD83D 0xDD17
+//HTML  &#128279; &#x1F517;
+
+//let a = "\u 0xF0 0x9F 0x94 0x97";
+let a="\u{1F517}";
+
+let temp = document.getElementById("temp")
+temp.textContent = a;
+// temp.innerHTML = "&#128279" + "&#x1F517;";

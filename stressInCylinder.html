@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+    </head>
+    <body>
+        <div>
+            <h1>Stress in Cylinder</h1>
+            The three theories are 
+            <ul>
+                <li>Lame - thick wall pressure vessels</li>
+                <li>Barlow \(P=\frac{2\sigma_at}{D}\)</li>
+                <li>Boardman</li>
+            </ul>
+
+            <p>I believe this is from Shigley's</p>
+            $$\sigma_i = \frac{-Pr}{E_i}\left( \frac{R^2+r_i^2}{R^2-r_i^2}-\nu_i\right)$$
+
+
+            <p>Not sure where this if from. I think it was from investigating the difference between abosolute pressure vs differential pressure i.e. is 10K internal pressure the same as 15K internal with 5K external?
+            $$\sigma_r = \frac{r_i^2P_i-r_o^2}{r_o^2-r_i^2P_o} - \frac{(P_i-P_o)r_i^2r_o^2}{(r_o-r_i)r^2}$$
+            $$\sigma_\theta = \frac{r_i^2P_i-r_o^2P_o}{r_o^2-r_i^2}+\frac{(P_i-P_o)r_i^2{r_o}^2}{(r_o^2-r_i^2)r^2}$$
+            Defining 
+            $$C = (P_o-P_i)\frac{r_i^2r_o^2}{(r_o^2-r_i^2)} $$
+            which is based on differential pressure
+            $$K=\frac{r_i^2P_i-r_o^2P_o}{r_o^2-r_i^2} $$
+            which is not based on differential pressure
+            $$\sigma_r = K - \frac{C}{r^2} \quad \text{and} \quad\sigma_\theta = K + \frac{C}{r^2}$$
+            $$\sigma_e = \sqrt{\sigma_1^2 -\sigma_1\sigma_2 + \sigma_2^2}$$
+            the term in the radial is
+            $$(K+\frac{C}{r^2})^2-(K+\frac{C}{r_i^2})(K-\frac{C}{r^2})+(K-\frac{C}{r^2})^2$$
+            <p>subsistuting \(x = \frac{C}{r^2}\)</p>
+            $$(K+x)^2 - (K+x)(K-x)+(K-x)^2$$
+            $$K^2+2Kx + x^2-(K^2-x^2)+(K^2-2Kx+x^2)$$ 
+            $$3x^2 + K^2$$
+            $$3\left(\frac{C}{r^2}\right)^2+K^2$$
+            $$\sigma_e=\sqrt{3\left(\frac{C}{r^2}\right)+K^2}$$
+        </div>
+    </body>
+</html>                                                
